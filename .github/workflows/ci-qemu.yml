@@ -9,11 +9,8 @@ on:
 jobs:
   build:
     name: build-push-updaterepo
-    uses: ebpro/gh-actions-shared-docker/.github/workflows/ci-shareable-docker-qemu.yml@develop
-    with:
-        env-list: >
-          [ 
-            ""
-          ]
+    uses: ebpro/gh-actions-shared-docker/.github/workflows/ci-shareable-docker-qemu.yml@develop    
     secrets: inherit
+    with: 
+      run-on: arc-runner-set
       
