@@ -1,0 +1,19 @@
+name: Multi Arch Docker QEMU CI
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 02 * * *'    
+  push:
+      
+jobs:
+  build:
+    name: build-push-updaterepo
+    uses: ebpro/gh-actions-shared-docker/.github/workflows/ci-shareable-docker-qemu.yml@develop
+    with:
+        env-list: >
+          [ 
+            ""
+          ]
+    secrets: inherit
+      
