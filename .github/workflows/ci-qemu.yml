@@ -12,5 +12,5 @@ jobs:
     uses: ebpro/gh-actions-shared-docker/.github/workflows/ci-shareable-docker-qemu.yml@develop    
     secrets: inherit
     with: 
-      run-on: arc-runner-set
+      runs-on: arc-runner-set
       
