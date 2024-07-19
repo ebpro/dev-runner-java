@@ -33,7 +33,7 @@ RUN curl -s "https://get.sdkman.io" | bash && \
     chmod a+x "$SDKMAN_DIR/bin/sdkman-init.sh" && \
     echo "sdkman_auto_answer=true\nsdkman_auto_selfupdate=false\nsdkman_insecure_ssl=false" > ${SDKMAN_DIR}/etc/config && \
     source "$SDKMAN_DIR/bin/sdkman-init.sh" && \
-    sdk install java ${JAVA_VERSION) && \
+    sdk install java ${JAVA_VERSION} && \
     sdk install kotlin ${KOTLIN_VERSION} && \
     sdk install gradle ${GRADLE_VERSION} && \
     sdk install maven ${MAVEN_VERSION} && \
