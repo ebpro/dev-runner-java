@@ -1,4 +1,5 @@
-FROM ghcr.io/actions/actions-runner:2.317.0
+# FROM ghcr.io/actions/actions-runner:2.317.0
+FROM ghcr.io/actions/actions-runner:latest
 
 LABEL org.opencontainers.image.authors="Emmanuel BRUNO (@emmanuelbruno)" \
       org.opencontainers.image.description="An debian based runner image for Java in GitHub Actions" \
@@ -13,7 +14,15 @@ LABEL org.opencontainers.image.authors="Emmanuel BRUNO (@emmanuelbruno)" \
 
 USER root
 
-RUN apt update -y && apt install -y curl git unzip zip && \
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        curl \
+        jq \
+        git \
+        gpg \
+        unzip \
+        wget \
+        zip && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -30,12 +39,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Installs Java development tools (Java, Kotlin, Gradle, Maven) via SDKMAN and configures the environment
 RUN curl -s "https://get.sdkman.io" | bash && \
-    chmod a+x "$SDKMAN_DIR/bin/sdkman-init.sh" && \
+    chmod a+x "${SDKMAN_DIR}/bin/sdkman-init.sh" && \
     echo "sdkman_auto_answer=true\nsdkman_auto_selfupdate=false\nsdkman_insecure_ssl=false" > ${SDKMAN_DIR}/etc/config && \
-    source "$SDKMAN_DIR/bin/sdkman-init.sh" && \
+    source "${SDKMAN_DIR}/bin/sdkman-init.sh" && \
     sdk install java ${JAVA_VERSION} && \
     sdk install kotlin ${KOTLIN_VERSION} && \
     sdk install gradle ${GRADLE_VERSION} && \
     sdk install maven ${MAVEN_VERSION} && \
     # sdk install mvnd ${MVND_VERSION} && \
     sdk flush archives
+
