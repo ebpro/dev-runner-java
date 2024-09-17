@@ -20,6 +20,7 @@ RUN apt-get update -y && \
         jq \
         git \
         gpg \
+        openssh-client \
         unzip \
         wget \
         zip && \
